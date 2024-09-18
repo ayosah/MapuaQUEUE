@@ -46,12 +46,15 @@ function login() {
         document.getElementById('login-page').style.display = 'none';
         document.getElementById('sfa-page').style.display = 'block';
         fetchQueueData(); // Fetch queue data when logged in
+
+        // Set up auto-refresh every 5 seconds
+        setInterval(fetchQueueData, 5000); // 5000 milliseconds = 5 seconds
     } else {
         alert('Invalid login');
     }
 }
 
-//Render Queue
+// Render Queue
 function renderQueue() {
     const queueList = document.getElementById('queue-list');
     queueList.innerHTML = '';
@@ -150,7 +153,6 @@ async function done() {
         alert('Please select a student');
     }
 }
-
 
 // Call out a student
 function callOut() {
