@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFA Queue System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="login-page">
+        <div id="login-container">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <div id="sfa-page" style="display: none;">
+        <h2>SFA Queue List</h2>
+        <table id="queue-table">
+            <thead>
+                <tr>
+                    <th>Queue Number</th>
+                    <th>Name</th>
+                    <th>Student Number</th>
+                    <th>Program</th>
+                    <th>Year</th>
+                    <th>Service</th>
+                    <th>SFA Number</th>
+                </tr>
+            </thead>
+            <tbody id="queue-list">
+                <!-- Rows will be dynamically populated -->
+            </tbody>
+        </table>
+
+        <div id="actions">
+            <button onclick="callOut()">CALL OUT</button>
+            <button onclick="servicing()">SERVICING</button>
+            <button onclick="done()">DONE</button>
+        </div>
+
+        <audio id="callout-sound" src="go_to_SFA.mp3"></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
