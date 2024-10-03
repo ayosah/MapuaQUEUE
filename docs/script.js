@@ -158,9 +158,9 @@ function callOut() {
 
             // Array to store the audio sequence
             const audioSequence = [
-                `docs\\sounds\\student_with_number.mp3`,
-                ...queueNumber.split('').map(digit => `docs\\sounds\\${digit}.mp3`), 
-                `docs\\sounds\\sfa${sfaNumber}.mp3` 
+                `docs/sounds/student_with_number.mp3`,
+                ...queueNumber.split('').map(digit => `docs/sounds/${digit}.mp3`), 
+                `docs/sounds/sfa${sfaNumber}.mp3` 
             ];
 
             // Function to play audio files in sequence
