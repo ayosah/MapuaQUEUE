@@ -148,6 +148,7 @@ function login() {
 }
 
 // Call out a student
+// Call out a student
 function callOut() {
     if (selectedStudentId !== null) {
         const student = queue.find(item => item.queue_number === selectedStudentId);
@@ -156,11 +157,11 @@ function callOut() {
             const queueNumber = student.queue_number.toString(); // Convert queue number to string
             const sfaNumber = student.sfa_number.replace('SFA-', ''); // Extract SFA number
 
-            // Array to store the audio sequence
+            // Array to store the audio sequence (use forward slashes)
             const audioSequence = [
-                `docs/sounds/student_with_number.mp3`,
-                ...queueNumber.split('').map(digit => `docs/sounds/${digit}.mp3`), 
-                `docs/sounds/sfa${sfaNumber}.mp3` 
+                `https://ayosah.github.io/MapuaQUEUE/docs/sounds/student_with_number.mp3`,
+                ...queueNumber.split('').map(digit => `https://ayosah.github.io/MapuaQUEUE/docs/sounds/${digit}.mp3`), 
+                `https://ayosah.github.io/MapuaQUEUE/docs/sounds/sfa${sfaNumber}.mp3`
             ];
 
             // Function to play audio files in sequence
@@ -184,6 +185,7 @@ function callOut() {
         alert('Please select a student');
     }
 }
+
 
 
 function playAudioSequence(files, index) {
