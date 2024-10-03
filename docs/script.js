@@ -159,9 +159,9 @@ function callOut() {
 
             // Array to store the audio sequence (use forward slashes)
             const audioSequence = [
-                `https://ayosah.github.io/MapuaQUEUE/docs/sounds/student_with_number.mp3`,
-                ...queueNumber.split('').map(digit => `https://ayosah.github.io/MapuaQUEUE/docs/sounds/${digit}.mp3`), 
-                `https://ayosah.github.io/MapuaQUEUE/docs/sounds/sfa${sfaNumber}.mp3`
+                `https://raw.githubusercontent.com/ayosah/MapuaQUEUE/main/sounds/student_with_number.mp3`,
+                ...queueNumber.split('').map(digit => `https://raw.githubusercontent.com/ayosah/MapuaQUEUE/main/sounds/${digit}.mp3`), 
+                `https://raw.githubusercontent.com/ayosah/MapuaQUEUE/main/sounds/sfa${sfaNumber}.mp3`
             ];
 
             // Function to play audio files in sequence
