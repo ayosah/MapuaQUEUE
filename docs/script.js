@@ -3,9 +3,10 @@ let selectedStudentId = null;
 let modifiedRows = {};
 let queue = []
 
-const API_KEY = 'AIzaSyBG7Rr4jOBesWwWM7a085HrPJD3tfdYJrM'; 
+const API_KEY = 'AIzaSyCJwI08wmirX6lRYcOM6P4szWdpuB9vHfE'; 
 const SPREADSHEET_ID = '1mhf0bWTXhYH_qYD47kMv9RuJBXAV3ELrRetT-Ov-ZQc';
 const RANGE = 'Sheet1!A2:J'; 
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxw0oUzDPAKGIZOEDlrXWqG6TYSLgyHVtFsvU3K4Hy6_cvzwM8qyQ6ABfmL2AuPR7eJ/exec';
 
 // Define users with associated SFA numbers
 const users = {
@@ -61,7 +62,28 @@ function selectStudent(queue_number) {
         selectedRow.classList.add('selected');
     }
 }
+async function updateStudentStatus(queueNumber, newStatus) {
+    try {
+        const response = await fetch(WEB_APP_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                queue_number: queueNumber,
+                status: newStatus,
+            }),
+        });
+        if (!response.ok) throw new Error('Network response was not ok');
+        const result = await response.json();
+        console.log('Update result:', result);
 
+        // Fetch the updated queue data to refresh the display
+        fetchQueueData();
+    } catch (error) {
+        console.error('Error updating student status:', error);
+    }
+}
 // Mark a student as servicing
 function servicing() {
     if (selectedStudentId !== null) {
@@ -70,7 +92,9 @@ function servicing() {
             student.status = 'green'; // Mark as servicing
             modifiedRows[student.queue_number] = 'green'; // Store this change
             renderQueue(); // Re-render queue with updated statuses
+            updateStudentStatus(student.queue_number, 'servicing'); // Send "servicing" as the new status
         }
+    
     } else {
         alert('Please select a student');
     }
@@ -82,20 +106,35 @@ function done() {
         if (student) {
             student.status = 'red'; // Mark as done
             modifiedRows[student.queue_number] = 'red'; // Store this change
+            updateStudentStatus(student.queue_number, 'done');
             renderQueue(); // Re-render queue with updated statuses
         }
     } else {
         alert('Please select a student');
     }
 }
-
+// Function to fetch data from the Apps Script
+async function fetchQueueData() {
+    try {
+        const response = await fetch(WEB_APP_URL);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        queue = data;
+        renderQueue();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
 // Fetch data from Google Sheets based on user-specific SFA number
 async function fetchQueueData(userSFA) {
     try {
         console.log('Fetching data from Google Sheets for user...');
         const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}?key=${API_KEY}`);
         
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`Network response was not ok: ${errorMessage}`);
+        }
 
         const data = await response.json();
         const rows = data.values;
@@ -119,6 +158,7 @@ async function fetchQueueData(userSFA) {
         console.error('Error fetching data:', error);
     }
 }
+
 
 
 // Login function
@@ -223,4 +263,3 @@ function logout() {
 
 // Add event listener for the logout button
 document.getElementById('logout-button').addEventListener('click', logout);
-
