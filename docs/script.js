@@ -115,7 +115,7 @@ function done() {
     }
 }
 // Function to fetch data from the Apps Script
-async function fetchQueueData() {
+async function fetchQueueDataFromWebApp() {
     try {
         const response = await fetch(WEB_APP_URL);
         if (!response.ok) throw new Error('Network response was not ok');
