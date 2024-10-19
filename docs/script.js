@@ -150,15 +150,17 @@ async function fetchQueueData(userSFA) {
                 year: row[6],
                 service: row[7],
                 sfa_number: row[8],
-                status: modifiedRows[row[0]] || ''  // Preserve status (green or red) if it exists
+                status: modifiedRows[row[0]] || ''  // Preserve status if it exists
             }))
             .filter(item => item.sfa_number === userSFA);
 
         renderQueue();  
     } catch (error) {
         console.error('Error fetching data:', error);
+        alert('Failed to fetch queue data. Please check your connection.');
     }
 }
+
 
 
 
