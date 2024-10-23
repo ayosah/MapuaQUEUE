@@ -9,11 +9,10 @@ const RANGE = 'Sheet1!A2:J';
 
 // Define users with associated SFA numbers
 const users = {
-    "user1": { password: "password1", sfa: "SFA-1" },
-    "user2": { password: "password2", sfa: "SFA-2" },
-    "user3": { password: "password3", sfa: "SFA-3" },
-    "user4": { password: "password4", sfa: "SFA-4" },
-    "user5": { password: "password5", sfa: "SFA-5" }
+    "SFA-1": { password: "password1", sfa: "SFA-1" },
+    "SFA-2": { password: "password2", sfa: "SFA-2" },
+    "SFA-3": { password: "password3", sfa: "SFA-3" },
+    "SFA-4": { password: "password4", sfa: "SFA-4" }
 };
 
 // Render the queue list
