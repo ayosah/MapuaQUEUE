@@ -47,7 +47,7 @@ body {
 
 /* Styling for the SFA Queue List page container */
 #sfa-page {
-    background-image: url('../images/sfa_background.jpg'); /* Background image for the SFA page */
+    background-image: url('https://raw.githubusercontent.com/ayosah/MapuaQUEUE/main/images/sfa_background.jpg'); /* Background image for the SFA page */
     background-size: cover; /* Ensures the image covers the entire background */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents repeating the image */
